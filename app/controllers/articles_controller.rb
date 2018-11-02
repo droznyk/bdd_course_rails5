@@ -12,8 +12,9 @@ class ArticlesController < ApplicationController
       flash[:success] = "Article has been created"
       redirect_to articles_path
     else
-      flash[:errors] = @article.errors.full_messages
-      redirect_back(fallback_location: root_path)
+      flash[:danger] = "Article has not been created"
+      render :new
+      #redirect_back(fallback_location: root_path)
     end
   end
   
