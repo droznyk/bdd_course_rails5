@@ -26,7 +26,8 @@
               <li class="active"><%= link_to "Authors", "#" %></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <% if current_user %>
+              <% if user_signed_in? %>
+                <li class="navbar-text">Signed in as <%= current_user.email %></li>
                 <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
               <% else %>
                 <li><%= link_to "Log in", new_user_session_path %></li>
@@ -41,7 +42,7 @@
       <div class="row">
         <div class="col-md-12">
           <% flash.each do |key, message| %>
-            <div class="text-center alert alert-<%= key == 'success' ? 'success' : 'danger' %>">
+            <div class="text-center alert alert-<%= ['notice', 'success'].include?(key) ? 'success' : 'danger' %>">
               <%= message %> 
             </div>
           <% end %>
